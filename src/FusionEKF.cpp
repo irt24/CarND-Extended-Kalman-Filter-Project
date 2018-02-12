@@ -122,8 +122,6 @@ void FusionEKF::ProcessMeasurement(const MeasurementPackage &measurement_pack) {
    ****************************************************************************/
 
   switch (measurement_pack.sensor_type_) {
-    // Radar gets it wrong once we pass into the negative side of the Ox axis.
-    // Maybe that's also the reason why it freezes right before getting back into the positive side.
     case MeasurementPackage::RADAR: {
       tools.CalculateJacobian(ekf_.x_, &H_radar_);
       ekf_.H_ = H_radar_;
@@ -143,8 +141,4 @@ void FusionEKF::ProcessMeasurement(const MeasurementPackage &measurement_pack) {
   // Print the output.
   cout << "x_ = " << ekf_.x_ << endl;
   cout << "P_ = " << ekf_.P_ << endl;
-  cout << "F_ = " << ekf_.F_ << endl;
-  cout << "H_ = " << ekf_.H_ << endl;
-  cout << "R_ = " << ekf_.R_ << endl;
-  cout << "Q_ = " << ekf_.Q_ << endl;
 }
